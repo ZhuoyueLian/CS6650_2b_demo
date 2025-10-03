@@ -15,18 +15,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://44.247.77.9:8080/products/999",
-					"protocol": "http",
+					"raw": "{{base_url}}/products/123",
 					"host": [
-						"44",
-						"247",
-						"77",
-						"9"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"products",
-						"999"
+						"123"
 					]
 				}
 			},
@@ -41,15 +36,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://44.247.77.9:8080/products/abc",
-					"protocol": "http",
+					"raw": "{{base_url}}/products/abc",
 					"host": [
-						"44",
-						"247",
-						"77",
-						"9"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"products",
 						"abc"
@@ -83,15 +73,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://44.247.77.9:8080/products/123/details",
-					"protocol": "http",
+					"raw": "{{base_url}}/products/123/details",
 					"host": [
-						"44",
-						"247",
-						"77",
-						"9"
+						"{{base_url}}"
 					],
-					"port": "8080",
 					"path": [
 						"products",
 						"123",
@@ -100,6 +85,56 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "http://44.247.77.9:8080/products/123",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products/123",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products",
+						"123"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://44.247.77.9:8080",
+			"type": "string"
 		}
 	]
 }

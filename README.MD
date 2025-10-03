@@ -36,6 +36,12 @@
 
 ## API Examples
 
+**Postman Collection:** For easy testing, import `res/Product API.postman_collection.json` into Postman.
+
+**Setup:** After importing, update the collection variable:
+1. Right-click the collection → Edit → Variables tab
+2. Update `base_url` with your ECS task's public IP or use `http://localhost:8080` for local testing
+
 ### Test all response codes
 
 **404 - Product Not Found**
@@ -43,12 +49,15 @@
 curl -X GET http://44.247.77.9:8080/products/999
 # Response: {"error":"NOT_FOUND","message":"product not found"}
 ```
+![404 Product Not Found](res/screenshots/postman_404_product_not_found.png "404 Error when product doesn't exist")
 
 **400 - Invalid Product ID**
 ```bash
 curl -X GET http://44.247.77.9:8080/products/abc
 # Response: {"message":"invalid product ID format"}
 ```
+![400 Invalid Product ID](res/screenshots/postman_400_invalid_product_id.png "Invalid Product ID Format Error")
+
 
 **204 - Create Product (No Content)**
 ```bash
@@ -64,12 +73,14 @@ curl -X POST http://44.247.77.9:8080/products/123/details \
   }'
 # Response: (empty, 204 status)
 ```
+![204 No Content](res/screenshots/postman_204_product_created.png "204 No Content Response After Product Creation")
 
 **200 - Get Product**
 ```bash
 curl -X GET http://44.247.77.9:8080/products/123
 # Response: {"product_id":123,"sku":"AWS-TEST-001",...}
 ```
+![200 OK Response](res/screenshots/postman_200_get_product_success.png "Successful Product Retrieval")
 
 ## Project Structure
 
@@ -89,7 +100,21 @@ curl -X GET http://44.247.77.9:8080/products/123
 │   │   ├── network/     # VPC and security groups
 │   │   └── logging/     # CloudWatch logs
 │   └── .gitignore       # Excludes tfstate and secrets
-└── locustfile.py        # Load testing script
+├── res/
+│   ├── screenshots/
+│   │   ├── go_run_test.png                      # Local Go testing
+│   │   ├── docker_container_test.png            # Docker testing
+│   │   ├── aws_deployed_api_test.png            # AWS deployment testing
+│   │   ├── postman_200_get_product_success.png  # 200 OK response
+│   │   ├── postman_204_product_created.png      # 204 No Content response
+│   │   ├── postman_400_invalid_product_id.png   # 400 Bad Request response
+│   │   ├── postman_404_product_not_found.png    # 404 Not Found response
+│   │   ├── locust_statistics_summary.png        # Load test statistics
+│   │   └── locust_performance_charts.png        # Load test charts
+│   ├── Product API.postman_collection.json      # Postman collection
+│   └── api.yaml                                  # OpenAPI specification
+├── locustfile.py        # Load testing script
+└── README.md            # Project documentation
 ```
 
 ## Load Testing Results
@@ -135,8 +160,19 @@ Declarative means you describe the *desired end state* (what resources should ex
 
 ## Screenshots
 
-- `local_api_test.png` - Testing with `go run main.go`
-- `docker_container_test.png` - Testing containerized app
-- `aws_deployed_api_test.png` - All response codes (200, 204, 400, 404)
-- `locust_statistics_summary.png` - Performance metrics
+All screenshots are located in the `res/screenshots/` directory:
+
+### Local and Container Testing
+- `go_run_test.png` - Testing API with `go run main.go`
+- `docker_container_test.png` - Testing containerized application locally
+- `aws_deployed_api_test.png` - Testing deployed API on AWS ECS
+
+### API Response Codes (Postman)
+- `postman_200_get_product_success.png` - Successful product retrieval
+- `postman_204_product_created.png` - Successful product creation (no content)
+- `postman_400_invalid_product_id.png` - Invalid product ID format error
+- `postman_404_product_not_found.png` - Product not found error
+
+### Load Testing Results (Locust)
+- `locust_statistics_summary.png` - Performance metrics and statistics
 - `locust_performance_charts.png` - RPS and response time graphs
