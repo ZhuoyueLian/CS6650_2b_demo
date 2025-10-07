@@ -1,22 +1,21 @@
 from locust import HttpUser, task, between
 import random
 
-class ProductAPIUser(HttpUser):
-    wait_time = between(1, 3)
+class ProductSearchUser(HttpUser):
+    wait_time = between(0.1, 0.5)  # Minimal wait time for aggressive testing
     
-    @task(3)  # GET will be called 3x more often than POST
-    def get_product(self):
-        product_id = random.randint(1, 1000)
-        self.client.get(f"/products/{product_id}")
+    # Common search terms that will find results
+    search_terms = [
+        "alpha", "beta", "gamma", "delta", "epsilon",
+        "electronics", "books", "home", "sports", "toys",
+        "product", "1", "2", "3"
+    ]
     
-    @task(1)
-    def post_product(self):
-        product_id = random.randint(1, 1000)
-        self.client.post(f"/products/{product_id}/details", json={
-            "product_id": product_id,
-            "sku": f"SKU-{product_id}",
-            "manufacturer": "Locust Test",
-            "category_id": random.randint(1, 10),
-            "weight": random.randint(100, 5000),
-            "some_other_id": random.randint(1, 999)
-        })
+    @task
+    def search_products(self):
+        query = random.choice(self.search_terms)
+        self.client.get(f"/products/search?q={query}", name="/products/search")
+    
+    @task(1)  # Less frequent than search
+    def health_check(self):
+        self.client.get("/health")
