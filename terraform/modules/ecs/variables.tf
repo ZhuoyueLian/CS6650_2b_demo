@@ -60,3 +60,28 @@ variable "memory" {
   default     = "512"
   description = "Memory (MiB)"
 }
+
+variable "enable_autoscaling" {
+  type    = bool
+  default = false
+}
+
+variable "min_capacity" {
+  type    = number
+  default = 1
+}
+
+variable "max_capacity" {
+  type    = number
+  default = 4
+}
+
+variable "cpu_target_value" {
+  type    = number
+  default = 70
+}
+
+variable "target_group_arn" {
+  type    = string
+  default = ""
+}
