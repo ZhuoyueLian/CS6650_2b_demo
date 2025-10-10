@@ -1,7 +1,7 @@
-from locust import HttpUser, task, between
+from locust import FastHttpUser, task, between
 import random
 
-class ProductSearchUser(HttpUser):
+class ProductSearchUser(FastHttpUser):
     wait_time = between(0.1, 0.5)  # Minimal wait time for aggressive testing
     
     # Common search terms that will find results
