@@ -49,14 +49,14 @@
 curl -X GET http://44.247.77.9:8080/products/999
 # Response: {"error":"NOT_FOUND","message":"product not found"}
 ```
-![404 Product Not Found](res/screenshots/postman_404_product_not_found.png "404 Error when product doesn't exist")
+![404 Product Not Found](res/screenshots/hw5/postman_404_product_not_found.png "404 Error when product doesn't exist")
 
 **400 - Invalid Product ID**
 ```bash
 curl -X GET http://44.247.77.9:8080/products/abc
 # Response: {"message":"invalid product ID format"}
 ```
-![400 Invalid Product ID](res/screenshots/postman_400_invalid_product_id.png "Invalid Product ID Format Error")
+![400 Invalid Product ID](res/screenshots/hw5/postman_400_invalid_product_id.png "Invalid Product ID Format Error")
 
 
 **204 - Create Product (No Content)**
@@ -73,14 +73,14 @@ curl -X POST http://44.247.77.9:8080/products/123/details \
   }'
 # Response: (empty, 204 status)
 ```
-![204 No Content](res/screenshots/postman_204_product_created.png "204 No Content Response After Product Creation")
+![204 No Content](res/screenshots/hw5/postman_204_product_created.png "204 No Content Response After Product Creation")
 
 **200 - Get Product**
 ```bash
 curl -X GET http://44.247.77.9:8080/products/123
 # Response: {"product_id":123,"sku":"AWS-TEST-001",...}
 ```
-![200 OK Response](res/screenshots/postman_200_get_product_success.png "Successful Product Retrieval")
+![200 OK Response](res/screenshots/hw5/postman_200_get_product_success.png "Successful Product Retrieval")
 
 ## Project Structure
 
